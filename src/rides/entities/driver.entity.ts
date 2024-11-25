@@ -1,9 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class Driver {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryColumn()
+  driver_id: number;
 
   @Column()
   name: string;

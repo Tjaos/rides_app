@@ -1,16 +1,18 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Entity, Column, ManyToOne, PrimaryColumn } from 'typeorm';
 import { Customer } from './customer.entity';
 import { Driver } from './driver.entity';
 
 @Entity()
 export class Ride {
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn()
   id: number;
 
-  @ManyToOne(() => Customer, (customer) => customer.id)
+  @Column()
+  @ManyToOne(() => Customer, (customer) => customer.customer_id)
   customer: Customer;
 
-  @ManyToOne(() => Driver, (driver) => driver.id)
+  @Column()
+  @ManyToOne(() => Driver, (driver) => driver.driver_id)
   driver: Driver;
 
   @Column()
