@@ -19,13 +19,13 @@ export class Ride {
   @Column()
   destination: string;
 
-  @Column('decimal')
+  @Column()
   distance: number;
 
   @Column()
   duration: string;
 
-  @Column('decimal')
+  @Column()
   value: number;
 
   @Column()

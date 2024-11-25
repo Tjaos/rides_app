@@ -1,4 +1,5 @@
-import { IsDate, IsNumber, IsString } from "class-validate";
+import { Transform } from "class-transformer";
+import { IsDate, IsString } from "class-validate";
 import { IsDecimal, IsInt, IsNotEmpty } from "class-validator";
 
 export class CreateRideDto {
@@ -20,14 +21,16 @@ export class CreateRideDto {
     @IsNotEmpty()
     destination: string;
   
-    @IsDecimal()
+
+    @Transform(({ value }) => parseFloat(value))
     distance: number;
   
     @IsString()
     @IsNotEmpty()
     duration: string;
   
-    @IsDecimal()
+
+    @Transform(({ value }) => parseFloat(value))
     value: number;
   
     @IsDate()

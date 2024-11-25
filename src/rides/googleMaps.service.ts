@@ -6,7 +6,7 @@ export class GoogleMapsService {
   constructor(private readonly httpService: HttpService) {}
 
   async getRoute(origin: string, destination: string) {
-    const apiKey = process.env.GOOGLE_MAPS_API_KEY;
+    const apiKey = process.env.GOOGLE_API_KEY;
     const url = `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&key=${apiKey}`;
 
     const response = await this.httpService.get(url).toPromise();
