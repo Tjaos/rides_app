@@ -1,16 +1,25 @@
-version: '3'
 services:
   backend:
-    build: ./rides_app 
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - "8080:8080" 
-    env_file:
-      - .env 
+      - "8080:8080"
+    volumes:
+      - .:/app
+    environment:
+      - NODE_ENV=development
 
+
+  database:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: rides_app
 
 #  frontend:
 #    build: ./frontend  # Caminho para a pasta do frontend
 #    ports:
 #      - "80:80"  # Expõe a porta 80 do frontend
-    depends_on:
-      - backend  # Garante que o backend seja iniciado antes do frontend
+#    depends_on:
+#      - backend  # Garante que o backend seja iniciado antes do frontend
