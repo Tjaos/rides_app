@@ -3,19 +3,18 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { RidesModule } from './rides/rides.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: process.env.DB_HOST || 'localhost',
-      port: parseInt(process.env.DB_PORT, 10) || 3306,
-      username: process.env.DB_USER || 'root',
-      password: process.env.DB_PASSWORD || 'root',
-      database: process.env.DB_NAME || 'rides_db',
-      autoLoadEntities: true,
+      type: 'sqlite',
+      database: 'db.rides_app',
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
-    }),    
+    }),   
+    ConfigModule.forRoot({
+      isGlobal: true}), 
     RidesModule],
   controllers: [AppController],
   providers: [AppService],

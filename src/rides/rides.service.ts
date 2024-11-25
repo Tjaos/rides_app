@@ -1,26 +1,30 @@
 import { Injectable } from '@nestjs/common';
 import { CreateRideDto } from './dto/create-ride.dto';
-import { UpdateRideDto } from './dto/update-ride.dto';
+import { Repository } from 'typeorm';
+import { Ride } from './entities/ride.entity';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class RidesService {
-  create(createRideDto: CreateRideDto) {
-    return 'This action adds a new ride';
+  constructor(
+    @InjectRepository(Ride)
+    private readonly repository: Repository<Ride>){
+
+  }
+
+
+
+  create(dto: CreateRideDto) {
+    const ride = this.repository.create(dto);
+    return this.repository.save(ride)
   }
 
   findAll() {
-    return `This action returns all rides`;
+    return this.repository.find()
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} ride`;
+    return this.repository.findOneBy({id})
   }
 
-  update(id: number, updateRideDto: UpdateRideDto) {
-    return `This action updates a #${id} ride`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} ride`;
-  }
 }
