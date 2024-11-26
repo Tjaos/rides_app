@@ -1,6 +1,6 @@
 import { Entity, Column, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Customer } from './customer.entity';
-import { Driver } from './driver.entity';
+import { Customer } from '../../customer/entities/customer.entity';
+import { Driver } from '../../driver/entities/driver.entity';
 
 @Entity()
 export class Ride {

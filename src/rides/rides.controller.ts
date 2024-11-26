@@ -20,4 +20,5 @@ export class RidesController {
   findOne(@Param('id') id: number) {
     return this.ridesService.findOne(id);
   }
+  
 }

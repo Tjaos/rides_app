@@ -15,7 +15,7 @@ export class Driver {
   vehicle: string;
 
   @Column()
-  rating: number;
+  rating: string;
 
   @Column()
   rate_per_km: number;

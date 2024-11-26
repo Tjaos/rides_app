@@ -5,8 +5,10 @@ import { RidesModule } from './rides/rides.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { Ride } from './rides/entities/ride.entity';
-import { Customer } from './rides/entities/customer.entity';
-import { Driver } from './rides/entities/driver.entity';
+import { Customer } from './customer/entities/customer.entity';
+import { Driver } from './driver/entities/driver.entity';
+import { CustomerModule } from './customer/customer.module';
+import { DriverModule } from './driver/driver.module';
 
 @Module({
   imports: [
@@ -20,7 +22,7 @@ import { Driver } from './rides/entities/driver.entity';
     TypeOrmModule.forFeature([Ride, Customer, Driver]),
     ConfigModule.forRoot({
       isGlobal: true}), 
-    RidesModule],
+    RidesModule, CustomerModule, DriverModule],
   controllers: [AppController],
   providers: [AppService],
 })

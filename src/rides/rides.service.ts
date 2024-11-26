@@ -3,8 +3,8 @@ import { CreateRideDto } from './dto/create-ride.dto';
 import { Repository } from 'typeorm';
 import { Ride } from './entities/ride.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Customer } from './entities/customer.entity';
-import { Driver } from './entities/driver.entity';
+import { Customer } from '../customer/entities/customer.entity';
+import { Driver } from '../driver/entities/driver.entity';
 
 @Injectable()
 export class RidesService {
@@ -19,21 +19,36 @@ export class RidesService {
 
   }
 
-
-
+  
   async create(dto: CreateRideDto) {
 
-    const customer = await this.customerRepository.findOne({ where: { id: dto.customerId } });
-    const driver = await this.driverRepository.findOne({ where: { id: dto.driverId } });
+    let customer = await this.customerRepository.findOne({ where: { id: dto.customerId } });
+    let driver = await this.driverRepository.findOne({ where: { id: dto.driverId } });
 
-    if (!customer || !driver) {
-      throw new Error('Customer or Driver not found');
+    if (!customer) {
+
+      customer = await this.customerRepository.save({
+        id: dto.customerId,
+        name: 'João Silva',
+      });
+    }
+    if (!driver) {
+      driver = await this.driverRepository.save({
+        id: dto.driverId,
+        name: 'Homer Simpson',
+        description: 'Motorista amigável.',
+        vehicle: 'Plymouth Valiant',
+        rating: '5/5',
+        rate_per_km: 2.5,
+        min_distance: 1,
+      });
     }
 
     const ride = this.rideRepository.create({
       ...dto,
-      customer,
-      driver});
+      driver,
+      customer
+    });
     return this.rideRepository.save(ride)
   }
 
