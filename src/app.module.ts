@@ -9,21 +9,24 @@ import { Customer } from './customer/entities/customer.entity';
 import { Driver } from './driver/entities/driver.entity';
 import { CustomerModule } from './customer/customer.module';
 import { DriverModule } from './driver/driver.module';
+import { DatabaseSeederService } from './database-seeder/database-seeder.service';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'sqlite',
-      database: 'db.rides.sqlite',
+      type: 'mysql',
+      host: 'localhost',
+      port: 3307,
+      username: 'root',
+      password: '',
+      database: 'minha_aplicacao',
+      autoLoadEntities: true,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
-      logging: true,
     }), 
     TypeOrmModule.forFeature([Ride, Customer, Driver]),
-    ConfigModule.forRoot({
-      isGlobal: true}), 
     RidesModule, CustomerModule, DriverModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, DatabaseSeederService],
 })
 export class AppModule {}

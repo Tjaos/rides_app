@@ -7,10 +7,10 @@ export class Ride {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Customer, (customer) => customer.id)
+  @ManyToOne(() => Customer, (customer) => customer.rides)
   customer: Customer;
 
-  @ManyToOne(() => Driver, (driver) => driver.id)
+  @ManyToOne(() => Driver, (driver) => driver.rides)
   driver: Driver;
 
   @Column()
@@ -19,13 +19,13 @@ export class Ride {
   @Column()
   destination: string;
 
-  @Column()
+  @Column('float')
   distance: number;
 
   @Column()
   duration: string;
 
-  @Column()
+  @Column('float')
   value: number;
 
   @Column()

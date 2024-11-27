@@ -1,11 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Ride } from 'src/rides/entities/ride.entity';
 
 @Entity()
 export class Customer {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  name: string;
-
+  @OneToMany(() => Ride, (ride) => ride.customer)
+  rides: Ride[];
 }
