@@ -1,25 +1,48 @@
+version: '3.8'
+
 services:
   backend:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: rides_app-backend
     ports:
       - "8080:8080"
     volumes:
       - .:/app
+    env_file:
+      - .env  
     environment:
       - NODE_ENV=development
+      - DB_HOST=mysql  
+      - DB_PORT=3306 
+      - DB_USER=user
+      - DB_PASSWORD=userpassword
+      - DB_NAME=minha_aplicacao
+    depends_on:
+      - mysql-container
+    networks:
+      - app-network
 
-
-  database:
-    image: mysql:8
+  mysql-container:
+    image: mysql:8.0 
+    container_name: rides_app-mysql
+    restart: always
+    ports:
+      - "3307:3306" 
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: rides_app
+      MYSQL_ROOT_PASSWORD: rootpassword 
+      MYSQL_DATABASE: minha_aplicacao 
+      MYSQL_USER: user
+      MYSQL_PASSWORD: userpassword 
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - app-network
 
-#  frontend:
-#    build: ./frontend  # Caminho para a pasta do frontend
-#    ports:
-#      - "80:80"  # Expõe a porta 80 do frontend
-#    depends_on:
-#      - backend  # Garante que o backend seja iniciado antes do frontend
+volumes:
+  mysql-data:
+    driver: local
+networks:
+  app-network:
+    driver: bridge

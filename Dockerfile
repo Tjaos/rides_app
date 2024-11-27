@@ -6,7 +6,7 @@ COPY package*.json ./
 
 RUN npm install
 
-RUN npm install sqlite3 --save
+RUN npm install mysql2 --save
 
 COPY . .
 
