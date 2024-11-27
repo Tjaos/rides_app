@@ -15,10 +15,10 @@ import { DatabaseSeederService } from './database-seeder/database-seeder.service
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: process.env.DB_HOST || 'mysql',
-      port: parseInt(process.env.DB_PORT) || 3306,
-      username: process.env.DB_USER || 'user',
-      password: process.env.DB_PASSWORD || 'userpassword',
+      host: process.env.DB_HOST || 'localhost',
+      port: parseInt(process.env.DB_PORT, 10) || 3306,
+      username: process.env.DB_USER || 'root',
+      password: process.env.DB_PASSWORD || 'root',
       database: process.env.DB_NAME || 'minha_aplicacao',
       autoLoadEntities: true,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],

@@ -14,10 +14,10 @@ services:
       - .env  
     environment:
       - NODE_ENV=development
-      - DB_HOST=mysql  
+      - DB_HOST=mysql-container 
       - DB_PORT=3306 
-      - DB_USER=user
-      - DB_PASSWORD=userpassword
+      - DB_USER=root
+      - DB_PASSWORD=root
       - DB_NAME=minha_aplicacao
     depends_on:
       - mysql-container
@@ -29,12 +29,12 @@ services:
     container_name: rides_app-mysql
     restart: always
     ports:
-      - "3307:3306" 
+      - "3306:3306" 
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword 
-      MYSQL_DATABASE: minha_aplicacao 
-      MYSQL_USER: user
-      MYSQL_PASSWORD: userpassword 
+      MYSQL_ROOT_PASSWORD: root 
+      MYSQL_DATABASE: minha_aplicacao
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
     volumes:
       - mysql-data:/var/lib/mysql
     networks:
