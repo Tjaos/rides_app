@@ -35,28 +35,18 @@
     padding: 4px;
     margin: 8px;
   }
+  .form input {
 
+    padding: 8px;
+    border-radius: 8px;
+    margin: 8px;
+  }
   .form button {
     padding: 8px;
     border-radius: 8px;
     cursor: pointer;
   }
 
-  .inputId{
-    width:50px;
-    padding: 8px;
-    border-radius: 8px;
-    margin: 8px;
-    border-color: black;
-  }
-
-  .inputData{
-    padding: 8px;
-    border-radius: 8px;
-    margin: 8px;
-    width: 600px;
-    border-color: black;
-  }
   .link{
     color: blue;
     font-size: medium;

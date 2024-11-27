@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import styles from './page.module.css';
+import Link from 'next/link';
 export default function RideRequest() {
   const [formData, setFormData] = useState({
     origin: '',
@@ -39,12 +40,26 @@ export default function RideRequest() {
 
   return (
     <div className={styles.page}>
+      <Link className={styles.link} href="/">
+        Voltar para o início
+      </Link>
       <main className={styles.main}>
         <h1>Solicitação de Viagem</h1>
         <form onSubmit={handleSubmit} className={styles.form}>
           <label>
+            ID do Cliente:
+            <input
+              className={styles.inputId}
+              type="text"
+              name="customerId"
+              value={formData.customerId}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
             Endereço de Origem:
             <input
+              className={styles.inputData}
               type="text"
               name="origin"
               value={formData.origin}
@@ -54,18 +69,10 @@ export default function RideRequest() {
           <label>
             Endereço de Destino:
             <input
+              className={styles.inputData}
               type="text"
               name="destination"
               value={formData.destination}
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            ID do Cliente:
-            <input
-              type="text"
-              name="customerId"
-              value={formData.customerId}
               onChange={handleChange}
             />
           </label>
